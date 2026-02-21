@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gentle Men — A Journal of Refined Living</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:   #080807;
+  --void:    #0d0c0b;
+  --dark:    #141310;
+  --charcoal:#1e1c19;
+  --smoke:   #2a2824;
+  --gold:    #b8973a;
+  --gold-lt: #d4b05a;
+  --gold-dk: #7a6120;
+  --gold-glow: rgba(184,151,58,0.12);
+  --ivory:   #f0ead8;
+  --ivory-dim:#a89e88;
+  --ivory-muted:#5a5448;
+  --rule:    rgba(184,151,58,0.18);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--black);
+  color: var(--ivory);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9999;
+  opacity:0.35;
+  mix-blend-mode: overlay;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+*, *::before { cursor: none; }
+.cur { position:fixed; pointer-events:none; z-index:10000; }
+#cur-dot { width:6px; height:6px; background:var(--gold); border-radius:50%; transform:translate(-50%,-50%); transition:transform .1s; }
+#cur-ring { width:32px; height:32px; border:1px solid var(--gold); border-radius:50%; transform:translate(-50%,-50%); opacity:.4; transition:width .3s,height .3s,opacity .3s; }
+body:hover #cur-dot { transform:translate(-50%,-50%) scale(1); }
+
+/* ===== TOP DATELINE ===== */
+.dateline {
+  background: var(--void);
+  border-bottom: 1px solid var(--rule);
+  padding: .6rem 4rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:'Cormorant SC', serif;
+  font-size:.62rem;
+  letter-spacing:.25em;
+  color: var(--ivory-muted);
+  text-transform:uppercase;
+  position:relative;
+  z-index:50;
+}
+.dateline-center { color:var(--gold); letter-spacing:.4em; }
+
+/* ===== MASTHEAD ===== */
+.masthead {
+  position:sticky;
+  top:0;
+  z-index:100;
+  background: rgba(8,8,7,.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.4rem 4rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.masthead-logo {
+  font-family:'Cormorant SC', serif;
+  font-size:1.55rem;
+  font-weight:300;
+  letter-spacing:.12em;
+  color:var(--ivory);
+  text-decoration:none;
+  line-height:1;
+}
+.masthead-logo span { color:var(--gold); }
+.masthead-logo sup {
+  font-family:'Cormorant', serif;
+  font-size:.55rem;
+  font-style:italic;
+  color:var(--ivory-muted);
+  letter-spacing:.1em;
+  vertical-align:super;
+  margin-left:.3em;
+}
+
+.nav-center {
+  display:flex;
+  gap:2.5rem;
+  list-style:none;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+}
+.nav-center a {
+  font-family:'Cormorant SC', serif;
+  font-size:.65rem;
+  letter-spacing:.22em;
+  color:var(--ivory-dim);
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:color .25s;
+  padding-bottom:.15rem;
+  border-bottom: 1px solid transparent;
+  transition: color .25s, border-color .25s;
+}
+.nav-center a:hover { color:var(--gold); border-color:var(--gold-dk); }
+
+.masthead-right {
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+}
+.subscribe-btn {
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--black);
+  background:var(--gold);
+  padding:.55rem 1.4rem;
+  text-decoration:none;
+  transition:background .3s;
+}
+.subscribe-btn:hover { background:var(--gold-lt); }
+
+/* ===== HERO ===== */
+.hero {
+  position:relative;
+  min-height:96vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+
+/* Left hero panel — dominant story */
+.hero-main {
+  position:relative;
+  background: var(--dark);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:4rem;
+  overflow:hidden;
+  min-height:96vh;
+}
+.hero-main-bg {
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to top, rgba(8,8,7,.95) 0%, rgba(8,8,7,.5) 50%, rgba(8,8,7,.2) 100%),
+    linear-gradient(135deg, #1a1612 0%, #0d0c0b 100%);
+  /* Simulated editorial photo with CSS */
+}
+.hero-photo-placeholder {
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+.hero-photo-placeholder::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 80% 80% at 70% 30%, rgba(184,151,58,.06) 0%, transparent 60%),
+    linear-gradient(160deg, var(--charcoal) 0%, var(--dark) 40%, var(--black) 100%);
+}
+/* Decorative vertical lines suggesting fabric texture */
+.hero-photo-placeholder::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 3px,
+    rgba(184,151,58,.015) 3px,
+    rgba(184,151,58,.015) 4px
+  );
+}
+
+.hero-issue-tag {
+  position:relative;
+  z-index:2;
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem;
+  letter-spacing:.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.hero-issue-tag::before {
+  content:'';
+  width:30px; height:1px;
+  background:var(--gold);
+}
+
+.hero-main-title {
+  position:relative;
+  z-index:2;
+  font-family:'Cormorant', serif;
+  font-size:clamp(2.8rem,4.5vw,4.8rem);
+  font-weight:300;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  color:var(--ivory);
+  margin-bottom:1.5rem;
+}
+.hero-main-title em {
+  font-style:italic;
+  color:var(--gold-lt);
+  display:block;
+}
+
+.hero-main-desc {
+  position:relative;
+  z-index:2;
+  font-size:.9rem;
+  line-height:1.85;
+  color:var(--ivory-dim);
+  max-width:400px;
+  margin-bottom:2rem;
+  font-family:'Libre Baskerville',serif;
+  font-weight:400;
+}
+
+.hero-main-meta {
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+}
+.read-link {
+  font-family:'Cormorant SC', serif;
+  font-size:.6rem;
+  letter-spacing:.3em;
+  color:var(--gold);
+  text-decoration:none;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  transition:gap .25s;
+}
+.read-link:hover { gap:1.1rem; }
+.read-link-line { width:30px; height:1px; background:var(--gold); display:inline-block; transition:width .25s; }
+.read-link:hover .read-link-line { width:50px; }
+.hero-main-time {
+  font-family:'Cormorant',serif;
+  font-style:italic;
+  font-size:.8rem;
+  color:var(--ivory-muted);
+}
+
+/* Right hero panel — 3 stacked secondary stories */
+.hero-sidebar {
+  display:flex;
+  flex-direction:column;
+  border-left:1px solid var(--rule);
+}
+.hero-sub {
+  flex:1;
+  padding:2.5rem 3rem;
+  border-bottom:1px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  transition:background .35s;
+}
+.hero-sub:last-child { border-bottom:none; }
+.hero-sub::before {
+  content:'';
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:2px;
+  background:var(--gold);
+  transform:scaleY(0);
+  transform-origin:bottom;
+  transition:transform .4s ease;
+}
+.hero-sub:hover { background:var(--void); }
+.hero-sub:hover::before { transform:scaleY(1); }
+
+.sub-cat {
+  font-family:'Cormorant SC', serif;
+  font-size:.55rem;
+  letter-spacing:.35em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:.8rem;
+}
+.sub-title {
+  font-family:'Cormorant', serif;
+  font-size:1.45rem;
+  font-weight:400;
+  line-height:1.2;
+  color:var(--ivory);
+  margin-bottom:.7rem;
+  letter-spacing:-.01em;
+}
+.sub-title em { font-style:italic; color:var(--ivory-dim); }
+.sub-desc {
+  font-size:.8rem;
+  line-height:1.75;
+  color:var(--ivory-muted);
+}
+.sub-read {
+  margin-top:1rem;
+  font-family:'Cormorant SC', serif;
+  font-size:.55rem;
+  letter-spacing:.25em;
+  color:var(--ivory-muted);
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:color .2s;
+}
+.hero-sub:hover .sub-read { color:var(--gold); }
+
+/* ===== SECTION DIVIDER ===== */
+.s-divider {
+  display:flex;
+  align-items:center;
+  gap:2rem;
+  padding:2.5rem 4rem;
+  border-bottom:1px solid var(--rule);
+  border-top:1px solid var(--rule);
+  position:relative;
+  z-index:1;
+}
+.s-divider-title {
+  font-family:'Cormorant SC', serif;
+  font-size:.6rem;
+  letter-spacing:.5em;
+  color:var(--gold);
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.s-divider-rule { flex:1; height:1px; background:var(--rule); }
+.s-divider-num {
+  font-family:'Cormorant', serif;
+  font-style:italic;
+  font-size:.75rem;
+  color:var(--ivory-muted);
+  white-space:nowrap;
+}
+
+/* ===== CATEGORIES STRIP ===== */
+.cats-strip {
+  display:flex;
+  border-bottom:1px solid var(--rule);
+  overflow-x:auto;
+  scrollbar-width:none;
+  position:relative;
+  z-index:1;
+}
+.cats-strip::-webkit-scrollbar { display:none; }
+.cat-item {
+  flex-shrink:0;
+  padding:1.6rem 3rem;
+  border-right:1px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.6rem;
+  cursor:default;
+  transition:background .3s;
+  text-decoration:none;
+}
+.cat-item:hover { background:var(--void); }
+.cat-item.active { background:var(--void); }
+.cat-icon { font-size:1.3rem; filter:grayscale(0.3); }
+.cat-label {
+  font-family:'Cormorant SC', serif;
+  font-size:.55rem;
+  letter-spacing:.3em;
+  color:var(--ivory-muted);
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:color .3s;
+}
+.cat-item:hover .cat-label, .cat-item.active .cat-label { color:var(--gold); }
+
+/* ===== FEATURE GRID ===== */
+.feature-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid var(--rule);
+  position:relative;
+  z-index:1;
+}
+.feat-card {
+  padding:3.5rem 3rem;
+  border-right:1px solid var(--rule);
+  position:relative;
+  overflow:hidden;
+  transition:background .35s;
+}
+.feat-card:last-child { border-right:none; }
+.feat-card::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:3rem; right:3rem;
+  height:1px;
+  background:linear-gradient(to right, var(--gold-dk), transparent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .5s ease;
+}
+.feat-card:hover { background:rgba(184,151,58,.03); }
+.feat-card:hover::after { transform:scaleX(1); }
+
+.fc-number {
+  font-family:'Cormorant', serif;
+  font-size:5rem;
+  font-weight:300;
+  color:rgba(184,151,58,.07);
+  position:absolute;
+  top:2rem; right:2rem;
+  line-height:1;
+  transition:color .4s;
+  pointer-events:none;
+}
+.feat-card:hover .fc-number { color:rgba(184,151,58,.12); }
+
+.fc-cat {
+  font-family:'Cormorant SC', serif;
+  font-size:.55rem;
+  letter-spacing:.35em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1.2rem;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+.fc-cat::before { content:''; width:20px; height:1px; background:var(--gold-dk); display:inline-block; }
+
+.fc-title {
+  font-family:'Cormorant', serif;
+  font-size:1.6rem;
+  font-weight:400;
+  line-height:1.2;
+  color:var(--ivory);
+  margin-bottom:1rem;
+  letter-spacing:-.01em;
+}
+.fc-title em { font-style:italic; color:var(--ivory-dim); }
+
+.fc-body {
+  font-size:.82rem;
+  line-height:1.85;
+  color:var(--ivory-muted);
+  margin-bottom:1.8rem;
+}
+
+.fc-link {
+  font-family:'Cormorant SC', serif;
+  font-size:.55rem;
+  letter-spacing:.3em;
+  color:var(--ivory-muted);
+  text-decoration:none;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  transition:color .25s, gap .25s;
+}
+.fc-link::after { content:'→'; transition:transform .25s; }
+.feat-card:hover .fc-link { color:var(--gold); gap:1.2rem; }
+
+/* ===== FULL-BLEED QUOTE ===== */
+.pullquote-section {
+  position:relative;
+  z-index:1;
+  background:var(--void);
+  border-bottom:1px solid var(--rule);
+  padding:6rem 4rem;
+  text-align:center;
+  overflow:hidden;
+}
+.pullquote-section::before {
+  content:'\201C';
+  font-family:'Cormorant', serif;
+  font-size:22rem;
+  color:rgba(184,151,58,.04);
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-55%);
+  line-height:1;
+  pointer-events:none;
+}
+.pq-rule-top {
+  display:flex;
+  align-items:center;
+  gap:2rem;
+  margin-bottom:3rem;
+  justify-content:center;
+}
+.pq-ornament {
+  color:var(--gold);
+  font-size:1rem;
+  letter-spacing:.5em;
+}
+.pq-rule { width:80px; height:1px; background:var(--rule); }
+
+.pullquote-text {
+  font-family:'Cormorant', serif;
+  font-size:clamp(1.6rem,3.5vw,3rem);
+  font-weight:300;
+  font-style:italic;
+  line-height:1.4;
+  color:var(--ivory);
+  max-width:900px;
+  margin:0 auto 2rem;
+  letter-spacing:-.01em;
+  position:relative;
+  z-index:1;
+}
+.pullquote-attribution {
+  font-family:'Cormorant SC', serif;
+  font-size:.6rem;
+  letter-spacing:.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+  position:relative;
+  z-index:1;
+}
+
+/* ===== EDITORIAL ROW — 2 col ===== */
+.editorial-row {
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  border-bottom:1px solid var(--rule);
+  position:relative;
+  z-index:1;
+}
+.ed-main {
+  padding:4rem;
+  border-right:1px solid var(--rule);
+  position:relative;
+  overflow:hidden;
+}
+.ed-sidebar {
+  display:flex;
+  flex-direction:column;
+}
+.ed-sidebar-item {
+  padding:2.5rem 3rem;
+  border-bottom:1px solid var(--rule);
+  flex:1;
+  cursor:default;
+  transition:background .3s;
+  position:relative;
+  overflow:hidden;
+}
+.ed-sidebar-item:last-child { border-bottom:none; }
+.ed-sidebar-item:hover { background:var(--void); }
+
+.ed-kicker {
+  font-family:'Cormorant SC', serif;
+  font-size:.55rem;
+  letter-spacing:.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.ed-title {
+  font-family:'Cormorant', serif;
+  font-size:2.2rem;
+  font-weight:300;
+  line-height:1.15;
+  color:var(--ivory);
+  margin-bottom:1.2rem;
+  letter-spacing:-.02em;
+}
+.ed-title em { font-style:italic; }
+.ed-body {
+  font-size:.88rem;
+  line-height:1.9;
+  color:var(--ivory-muted);
+  margin-bottom:2rem;
+}
+.ed-byline {
+  font-family:'Cormorant', serif;
+  font-style:italic;
+  font-size:.82rem;
+  color:var(--ivory-muted);
+  margin-bottom:1.5rem;
+}
+.ed-byline span { color:var(--gold-lt); font-style:normal; }
+
+.sidebar-item-cat {
+  font-family:'Cormorant SC', serif;
+  font-size:.52rem;
+  letter-spacing:.3em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:.6rem;
+}
+.sidebar-item-title {
+  font-family:'Cormorant', serif;
+  font-size:1.15rem;
+  font-weight:400;
+  line-height:1.25;
+  color:var(--ivory);
+  margin-bottom:.5rem;
+}
+.sidebar-item-desc {
+  font-size:.78rem;
+  line-height:1.7;
+  color:var(--ivory-muted);
+}
+
+/* ===== COLUMNS — 4 short pieces ===== */
+.columns-section {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--rule);
+  position:relative;
+  z-index:1;
+}
+.column-piece {
+  padding:3rem 2.5rem;
+  border-right:1px solid var(--rule);
+  position:relative;
+  cursor:default;
+  transition:background .3s;
+}
+.column-piece:last-child { border-right:none; }
+.column-piece:hover { background:var(--void); }
+
+.col-num {
+  font-family:'Cormorant', serif;
+  font-size:.65rem;
+  font-style:italic;
+  color:var(--gold-dk);
+  margin-bottom:1.2rem;
+}
+.col-title {
+  font-family:'Cormorant', serif;
+  font-size:1.2rem;
+  font-weight:400;
+  line-height:1.3;
+  color:var(--ivory);
+  margin-bottom:.8rem;
+}
+.col-body {
+  font-size:.8rem;
+  line-height:1.8;
+  color:var(--ivory-muted);
+  margin-bottom:1.2rem;
+}
+.col-tag {
+  display:inline-block;
+  font-family:'Cormorant SC', serif;
+  font-size:.5rem;
+  letter-spacing:.25em;
+  color:var(--ivory-muted);
+  text-transform:uppercase;
+  border:1px solid var(--rule);
+  padding:.25rem .7rem;
+  transition:border-color .3s, color .3s;
+}
+.column-piece:hover .col-tag { border-color:var(--gold-dk); color:var(--gold); }
+
+/* ===== SUBSCRIBE BANNER ===== */
+.sub-banner {
+  position:relative;
+  z-index:1;
+  background:var(--void);
+  border-bottom:1px solid var(--rule);
+  padding:5rem 4rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:center;
+  overflow:hidden;
+}
+.sub-banner::before {
+  content:'The\AGentle\AMen';
+  white-space:pre;
+  font-family:'Cormorant SC', serif;
+  font-size:16rem;
+  font-weight:300;
+  color:rgba(184,151,58,.03);
+  position:absolute;
+  right:-2rem;
+  top:50%;
+  transform:translateY(-50%);
+  line-height:.85;
+  pointer-events:none;
+  letter-spacing:-.05em;
+}
+.sb-eyebrow {
+  font-family:'Cormorant SC', serif;
+  font-size:.6rem;
+  letter-spacing:.5em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1.2rem;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.sb-eyebrow::before { content:''; width:30px; height:1px; background:var(--gold); }
+.sb-title {
+  font-family:'Cormorant', serif;
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:300;
+  line-height:1.15;
+  color:var(--ivory);
+  margin-bottom:1rem;
+  letter-spacing:-.02em;
+}
+.sb-title em { font-style:italic; color:var(--gold-lt); }
+.sb-desc {
+  font-size:.85rem;
+  line-height:1.85;
+  color:var(--ivory-muted);
+}
+.sb-form { display:flex; flex-direction:column; gap:1rem; }
+.sb-input-row { display:flex; gap:0; }
+.sb-input {
+  flex:1;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--rule);
+  border-right:none;
+  color:var(--ivory);
+  font-family:'Libre Baskerville',serif;
+  font-size:.88rem;
+  padding:.9rem 1.4rem;
+  outline:none;
+  transition:border-color .3s;
+}
+.sb-input:focus { border-color:var(--gold-dk); }
+.sb-input::placeholder { color:var(--ivory-muted); font-style:italic; }
+.sb-submit {
+  background:var(--gold);
+  border:1px solid var(--gold);
+  color:var(--black);
+  font-family:'Cormorant SC',serif;
+  font-size:.6rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  padding:.9rem 1.8rem;
+  cursor:default;
+  transition:background .3s;
+  white-space:nowrap;
+}
+.sb-submit:hover { background:var(--gold-lt); }
+.sb-note {
+  font-family:'Cormorant',serif;
+  font-style:italic;
+  font-size:.75rem;
+  color:var(--ivory-muted);
+}
+.sb-perks {
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+.sb-perks li {
+  font-size:.78rem;
+  color:var(--ivory-muted);
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+.sb-perks li::before { content:'✦'; color:var(--gold-dk); font-size:.55rem; }
+
+/* ===== FOOTER ===== */
+footer {
+  position:relative;
+  z-index:1;
+  background:var(--void);
+  border-top:1px solid var(--rule);
+}
+.footer-top {
+  display:grid;
+  grid-template-columns:1.8fr 1fr 1fr 1fr;
+  gap:0;
+  border-bottom:1px solid var(--rule);
+}
+.footer-col {
+  padding:3.5rem 3rem;
+  border-right:1px solid var(--rule);
+}
+.footer-col:last-child { border-right:none; }
+.footer-brand {
+  font-family:'Cormorant SC', serif;
+  font-size:1.2rem;
+  font-weight:300;
+  letter-spacing:.1em;
+  color:var(--ivory);
+  margin-bottom:.3rem;
+}
+.footer-brand span { color:var(--gold); }
+.footer-tagline {
+  font-family:'Cormorant', serif;
+  font-style:italic;
+  font-size:.82rem;
+  color:var(--ivory-muted);
+  margin-bottom:1.5rem;
+}
+.footer-desc {
+  font-size:.78rem;
+  line-height:1.8;
+  color:var(--ivory-muted);
+  margin-bottom:1.5rem;
+}
+.footer-col-title {
+  font-family:'Cormorant SC', serif;
+  font-size:.55rem;
+  letter-spacing:.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+.footer-links { list-style:none; }
+.footer-links li { margin-bottom:.6rem; }
+.footer-links a {
+  font-size:.8rem;
+  color:var(--ivory-muted);
+  text-decoration:none;
+  font-family:'Libre Baskerville',serif;
+  transition:color .2s;
+  letter-spacing:.02em;
+}
+.footer-links a:hover { color:var(--gold-lt); }
+
+.footer-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.5rem 3rem;
+}
+.footer-copy {
+  font-family:'Cormorant', serif;
+  font-style:italic;
+  font-size:.75rem;
+  color:var(--ivory-muted);
+}
+.footer-bottom-links {
+  display:flex;
+  gap:2rem;
+  list-style:none;
+}
+.footer-bottom-links a {
+  font-family:'Cormorant SC', serif;
+  font-size:.5rem;
+  letter-spacing:.25em;
+  color:var(--ivory-muted);
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:color .2s;
+}
+.footer-bottom-links a:hover { color:var(--gold); }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .9s ease, transform .9s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay:.1s; }
+.reveal-d2 { transition-delay:.2s; }
+.reveal-d3 { transition-delay:.3s; }
+.reveal-d4 { transition-delay:.4s; }
+
+/* ===== LOAD ANIMATIONS ===== */
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+.hero-issue-tag { animation:fadeUp .8s ease forwards .2s; opacity:0; }
+.hero-main-title { animation:fadeUp .8s ease forwards .4s; opacity:0; }
+.hero-main-desc { animation:fadeUp .8s ease forwards .6s; opacity:0; }
+.hero-main-meta { animation:fadeUp .8s ease forwards .8s; opacity:0; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1100px) {
+  .dateline { padding:.6rem 2rem; }
+  .masthead { padding:1.2rem 2rem; }
+  .nav-center { display:none; }
+  .hero { grid-template-columns:1fr; }
+  .hero-main { min-height:70vh; }
+  .hero-sidebar { display:none; }
+  .feature-grid { grid-template-columns:1fr; }
+  .feat-card { border-right:none; border-bottom:1px solid var(--rule); }
+  .editorial-row { grid-template-columns:1fr; }
+  .ed-main { border-right:none; border-bottom:1px solid var(--rule); }
+  .columns-section { grid-template-columns:1fr 1fr; }
+  .sub-banner { grid-template-columns:1fr; padding:4rem 2rem; }
+  .footer-top { grid-template-columns:1fr 1fr; }
+  .s-divider, .cats-strip, .feature-grid, .pullquote-section, .editorial-row, .columns-section, .sub-banner { padding-left:2rem; padding-right:2rem; }
+  .ed-main, .ed-sidebar-item { padding:3rem 2rem; }
+  .column-piece { padding:2.5rem 2rem; }
+  .footer-col { padding:2.5rem 2rem; }
+  .footer-bottom { padding:1.5rem 2rem; flex-direction:column; gap:1rem; text-align:center; }
+}
+@media(max-width:600px) {
+  .columns-section { grid-template-columns:1fr; }
+  .column-piece { border-right:none; border-bottom:1px solid var(--rule); }
+  .footer-top { grid-template-columns:1fr; }
+  .cats-strip { gap:0; }
+  .cat-item { padding:1.2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cur" id="cur-dot"></div>
+<div class="cur" id="cur-ring"></div>
+
+<!-- DATELINE -->
+<div class="dateline">
+  <span>Est. MMXXV · London</span>
+  <span class="dateline-center">The Gentle Men · A Journal of Refined Living</span>
+  <span>Vol. I · No. 1</span>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <a class="masthead-logo" href="#">The Gentle<span>.</span>Men<sup>a journal</sup></a>
+  <ul class="nav-center">
+    <li><a href="#style">Style</a></li>
+    <li><a href="#grooming">Grooming</a></li>
+    <li><a href="#leisure">Leisure</a></li>
+    <li><a href="#travel">Travel</a></li>
+    <li><a href="#watches">Horology</a></li>
+    <li><a href="#character">Character</a></li>
+  </ul>
+  <div class="masthead-right">
+    <a href="#newsletter" class="subscribe-btn">Subscribe</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Main story -->
+  <div class="hero-main">
+    <div class="hero-photo-placeholder"></div>
+    <div class="hero-issue-tag">Cover Story · Issue One</div>
+    <h1 class="hero-main-title">
+      The Quiet Art of<br>
+      <em>Dressing Well</em><br>
+      Without Trying
+    </h1>
+    <p class="hero-main-desc">Elegance is not a matter of what you wear, but of what you understand. The gentleman who turns heads is rarely the one who tried the hardest — he is the one who chose, then forgot about it entirely.</p>
+    <div class="hero-main-meta">
+      <a href="#" class="read-link"><span class="read-link-line"></span>Read the Essay</a>
+      <span class="hero-main-time">12 min read</span>
+    </div>
+  </div>
+
+  <!-- Sidebar stories -->
+  <div class="hero-sidebar">
+    <div class="hero-sub" id="grooming">
+      <div class="sub-cat">Grooming</div>
+      <div class="sub-title">The Five-Minute Face:<br><em>A Gentleman's Morning Ritual</em></div>
+      <div class="sub-desc">What separates the polished man from the merely well-dressed? Often it is two minutes with the right tools and the discipline to use them daily.</div>
+      <a href="#" class="sub-read">Continue reading →</a>
+    </div>
+    <div class="hero-sub" id="watches">
+      <div class="sub-cat">Horology</div>
+      <div class="sub-title">On Wearing a Watch<br><em>That Outlives You</em></div>
+      <div class="sub-desc">A mechanical watch is the only luxury that improves with age, demands your attention, and asks nothing in return except to be wound.</div>
+      <a href="#" class="sub-read">Continue reading →</a>
+    </div>
+    <div class="hero-sub" id="leisure">
+      <div class="sub-cat">Whisky & Arts</div>
+      <div class="sub-title">A Single Malt,<br><em>Taken Seriously</em></div>
+      <div class="sub-desc">The connoisseur does not drink for effect. He drinks to listen — to the peat, the wood, the decade, the hand that distilled it.</div>
+      <a href="#" class="sub-read">Continue reading →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES STRIP -->
+<nav class="cats-strip" id="style">
+  <a href="#" class="cat-item active">
+    <span class="cat-icon">🧥</span>
+    <span class="cat-label">Style & Dress</span>
+  </a>
+  <a href="#" class="cat-item">
+    <span class="cat-icon">🪒</span>
+    <span class="cat-label">Grooming</span>
+  </a>
+  <a href="#" class="cat-item">
+    <span class="cat-icon">🥃</span>
+    <span class="cat-label">Whisky & Cigars</span>
+  </a>
+  <a href="#" class="cat-item">
+    <span class="cat-icon">✈️</span>
+    <span class="cat-label">Travel</span>
+  </a>
+  <a href="#" class="cat-item">
+    <span class="cat-icon">⌚</span>
+    <span class="cat-label">Horology</span>
+  </a>
+  <a href="#" class="cat-item">
+    <span class="cat-icon">🎩</span>
+    <span class="cat-label">Character</span>
+  </a>
+</nav>
+
+<!-- SECTION DIVIDER -->
+<div class="s-divider">
+  <div class="s-divider-rule"></div>
+  <div class="s-divider-title">Featured Essays</div>
+  <div class="s-divider-rule"></div>
+  <div class="s-divider-num">Issue I · 2025</div>
+</div>
+
+<!-- FEATURE GRID -->
+<section class="feature-grid">
+  <div class="feat-card reveal reveal-d1" id="travel">
+    <div class="fc-number">01</div>
+    <div class="fc-cat">Travel</div>
+    <h2 class="fc-title">The Last Hotels<br>Worth <em>Dressing For</em></h2>
+    <p class="fc-body">There remain, in certain corners of Europe, hotels that still believe a man should arrive as though arrival matters. We found seven of them, from Lisbon to Ljubljana.</p>
+    <a href="#" class="fc-link">Read the guide</a>
+  </div>
+  <div class="feat-card reveal reveal-d2">
+    <div class="fc-number">02</div>
+    <div class="fc-cat">Character</div>
+    <h2 class="fc-title">Why the Quiet<br>Man Wins <em>Eventually</em></h2>
+    <p class="fc-body">Restraint is not weakness. The man who speaks last and listens most has understood something that the room has not. On patience as the ultimate masculine virtue.</p>
+    <a href="#" class="fc-link">Read the essay</a>
+  </div>
+  <div class="feat-card reveal reveal-d3">
+    <div class="fc-number">03</div>
+    <div class="fc-cat">Style</div>
+    <h2 class="fc-title">The Only<br>Suit You'll <em>Ever Need</em></h2>
+    <p class="fc-body">Not a wardrobe — a single, considered choice. The argument for owning one exceptional suit rather than twelve adequate ones, and the tailors still worth the pilgrimage.</p>
+    <a href="#" class="fc-link">Read the argument</a>
+  </div>
+</section>
+
+<!-- PULLQUOTE -->
+<div class="pullquote-section">
+  <div class="pq-rule-top">
+    <div class="pq-rule"></div>
+    <div class="pq-ornament">✦ ✦ ✦</div>
+    <div class="pq-rule"></div>
+  </div>
+  <blockquote class="pullquote-text reveal">
+    "Elegance is not about being noticed. It is about being remembered."
+  </blockquote>
+  <div class="pullquote-attribution reveal reveal-d1">— Giorgio Armani</div>
+</div>
+
+<!-- EDITORIAL ROW -->
+<section class="editorial-row">
+  <div class="ed-main reveal" id="character">
+    <div class="ed-kicker">Long Read · Character</div>
+    <h2 class="ed-title">On <em>Becoming</em><br>The Man You Intended</h2>
+    <p class="ed-byline">By <span>The Editors</span></p>
+    <p class="ed-body">There is a version of you that you imagined at twenty-two — better dressed, more composed, moving through the world with a particular kind of ease. Most men abandon that image by thirty. The Gentle Man does not. He refines it.</p>
+    <p class="ed-body">Character is not something you find. It is something you choose, repeatedly, in small moments that no one witnesses — how you treat the waiter, whether you keep your word when inconvenient, the way you carry loss without performing it.</p>
+    <a href="#" class="read-link"><span class="read-link-line"></span>Read the full essay</a>
+  </div>
+  <div class="ed-sidebar">
+    <div class="ed-sidebar-item reveal reveal-d1">
+      <div class="sidebar-item-cat">Grooming</div>
+      <div class="sidebar-item-title">The Fragrance That Becomes <em>You</em></div>
+      <div class="sidebar-item-desc">On choosing a signature scent and the patience required to let it settle into something that is no longer the perfumer's work but yours.</div>
+    </div>
+    <div class="ed-sidebar-item reveal reveal-d2">
+      <div class="sidebar-item-cat">Horology</div>
+      <div class="sidebar-item-title">Five Watches Under £2,000 That <em>Whisper</em></div>
+      <div class="sidebar-item-desc">The well-chosen watch does not announce itself. A curated selection for the man who understands that understatement is the highest form of luxury.</div>
+    </div>
+    <div class="ed-sidebar-item reveal reveal-d3">
+      <div class="sidebar-item-cat">Leisure</div>
+      <div class="sidebar-item-title">The Cigar: A Defence</div>
+      <div class="sidebar-item-desc">Not a habit. Not an indulgence. A ritual — measured in minutes stolen from the pace of ordinary life. On why the gentleman smokes slowly and alone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COLUMNS -->
+<section class="columns-section">
+  <div class="column-piece reveal reveal-d1">
+    <div class="col-num">I · Style</div>
+    <div class="col-title">On Wearing Colour Without Apology</div>
+    <div class="col-body">The English gentleman's terror of colour is neither taste nor restraint — it is fear. A considered burgundy or a well-worn olive says more than a lifetime of navy.</div>
+    <span class="col-tag">3 min read</span>
+  </div>
+  <div class="column-piece reveal reveal-d2">
+    <div class="col-num">II · Grooming</div>
+    <div class="col-title">Cold Water. Every Morning. No Exceptions.</div>
+    <div class="col-body">Discipline begins before breakfast. The cold shower is not asceticism — it is the first victory of the day, taken before the world has had a chance to test you.</div>
+    <span class="col-tag">2 min read</span>
+  </div>
+  <div class="column-piece reveal reveal-d3">
+    <div class="col-num">III · Whisky</div>
+    <div class="col-title">Islay vs. Speyside: An Honest Reckoning</div>
+    <div class="col-body">Both traditions are great. Neither is correct. The argument that has divided drawing rooms since the nineteenth century, adjudicated at last — inconclusively.</div>
+    <span class="col-tag">5 min read</span>
+  </div>
+  <div class="column-piece reveal reveal-d4">
+    <div class="col-num">IV · Travel</div>
+    <div class="col-title">Why You Should Always Take the Train</div>
+    <div class="col-body">The airport is a non-place. The railway station is theatre. One returns you home as you left; the other returns you changed. Choose accordingly.</div>
+    <span class="col-tag">4 min read</span>
+  </div>
+</section>
+
+<!-- SUBSCRIBE BANNER -->
+<section class="sub-banner" id="newsletter">
+  <div class="reveal">
+    <div class="sb-eyebrow">The Journal</div>
+    <h2 class="sb-title">Delivered to Your<br>Inbox, <em>Fortnightly</em></h2>
+    <p class="sb-desc">Two essays. One recommendation. No noise. The Gentle Men newsletter arrives every other Friday — the reading equivalent of a well-made Negroni at the end of a long week.</p>
+  </div>
+  <div class="reveal reveal-d2">
+    <div class="sb-form">
+      <div class="sb-input-row">
+        <input class="sb-input" type="email" placeholder="your@address.com">
+        <button class="sb-submit">Subscribe</button>
+      </div>
+      <div class="sb-note">No advertising. No affiliate nonsense. Unsubscribe at any time.</div>
+      <ul class="sb-perks">
+        <li>Two essays, fortnightly</li>
+        <li>The Gentleman's Reading List — quarterly</li>
+        <li>Early access to future features</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-brand">The Gentle<span>.</span>Men</div>
+      <div class="footer-tagline">A Journal of Refined Living</div>
+      <p class="footer-desc">We write for the man who dresses intentionally, travels thoughtfully, and understands that excellence in small things is not vanity — it is philosophy.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">The Journal</div>
+      <ul class="footer-links">
+        <li><a href="#">Style & Dress</a></li>
+        <li><a href="#">Grooming</a></li>
+        <li><a href="#">Whisky & Cigars</a></li>
+        <li><a href="#">Travel</a></li>
+        <li><a href="#">Horology</a></li>
+        <li><a href="#">Character</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">The House</div>
+      <ul class="footer-links">
+        <li><a href="#">About the Editors</a></li>
+        <li><a href="#">Our Philosophy</a></li>
+        <li><a href="#">Submissions</a></li>
+        <li><a href="#">Advertising</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Correspondence</div>
+      <ul class="footer-links">
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">Letters to the Editor</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">X / Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 thegentle.men — All rights reserved. Est. London, MMXXV.</span>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Cookies</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+// ===== CURSOR =====
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+(function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+// ===== SCROLL REVEAL =====
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ===== ACTIVE NAV CAT =====
+document.querySelectorAll('.cat-item').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
