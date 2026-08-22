@@ -7,6 +7,16 @@
 (function () {
   'use strict';
 
+  const ICONS = {
+    sun: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>',
+    moon: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>',
+    search: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+    bookmarkUnsaved: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>',
+    bookmarkSaved: '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>',
+    close: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+  };
+
+
   // --- 1. Search Index Data Registry ---
   const SITE_INDEX = [
     // --- Category Hubs ---
@@ -77,7 +87,7 @@
       const current = this.getTheme();
       const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
       toggleButtons.forEach(btn => {
-        btn.innerHTML = current === 'dark' ? '☀️' : '🌙';
+        btn.innerHTML = current === 'dark' ? ICONS.sun : ICONS.moon;
         btn.setAttribute('aria-label', `Switch to ${current === 'dark' ? 'Light' : 'Dark'} Mode`);
         btn.title = `Switch to ${current === 'dark' ? 'Light' : 'Dark'} Mode`;
       });
@@ -103,7 +113,7 @@
         overlay.innerHTML = `
           <div class="command-palette-modal" role="dialog" aria-modal="true" aria-label="Search The Gentle Men">
             <div class="palette-input-wrap">
-              <span>🔍</span>
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
               <input type="text" class="palette-input" placeholder="Search essays, craft, canon, philosophy..." autocomplete="off" spellcheck="false">
             </div>
             <ul class="palette-results-list" role="listbox"></ul>
@@ -281,7 +291,7 @@
         const targetUrl = btn.getAttribute('data-url') || currentPath;
         const saved = this.isBookmarked(targetUrl);
         btn.classList.toggle('active', saved);
-        btn.innerHTML = saved ? '★ Saved to Archive' : '☆ Save Article';
+        btn.innerHTML = saved ? `${ICONS.bookmarkSaved} <span>Saved to Archive</span>` : `${ICONS.bookmarkUnsaved} <span>Save Article</span>`;
       });
     }
   };
@@ -296,7 +306,7 @@
         drawer.className = 'mobile-drawer';
         drawer.innerHTML = `
           <div class="mobile-drawer-content">
-            <button class="mobile-drawer-close" aria-label="Close menu">&times;</button>
+            <button class="mobile-drawer-close" aria-label="Close menu">${ICONS.close}</button>
             <ul class="mobile-nav-list">
               <li><a href="/">Home</a></li>
               <li><a href="/categories/the-cloth.html">The Cloth</a></li>
