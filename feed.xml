@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Gentle Men</title>
+    <link>https://thegentle.men/</link>
+    <description>A research-driven journal of refined living, intellectual reflection, and timeless craft.</description>
+    <language>en</language>
+    <lastBuildDate>Sun, 22 Feb 2026 12:00:00 GMT</lastBuildDate>
+    <atom:link href="https://thegentle.men/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>The Dignity of the Unlined Jacket: Anatomy of Neapolitan Soft Tailoring</title>
+      <link>https://thegentle.men/articles/the-dignity-of-the-unlined-jacket.html</link>
+      <guid>https://thegentle.men/articles/the-dignity-of-the-unlined-jacket.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Julian Vance</author>
+      <category>The Cloth</category>
+      <description>Why the structural omission of canvas, heavy padding, and synthetic linings demands greater cutting mastery and invites an unhurried posture of ease.</description>
+    </item>
+
+    <item>
+      <title>The Thirty-Year Shoe: Mechanical Realities of the Goodyear Welt</title>
+      <link>https://thegentle.men/articles/the-thirty-year-shoe.html</link>
+      <guid>https://thegentle.men/articles/the-thirty-year-shoe.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Alistair Grey</author>
+      <category>The Cloth</category>
+      <description>An empirical investigation into leather fiber fatigue, oak-bark pit tanning, and sacrificial welting.</description>
+    </item>
+
+    <item>
+      <title>The Last Watchmakers of the Vallée de Joux: The Micro-Mechanics of Mortality</title>
+      <link>https://thegentle.men/articles/the-last-watchmakers-of-the-vallee-de-joux.html</link>
+      <guid>https://thegentle.men/articles/the-last-watchmakers-of-the-vallee-de-joux.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Henri Beauchamp</author>
+      <category>The Hand</category>
+      <description>Inside independent Swiss ateliers where hand-beveled anglage resists the sterile automation of 5-axis CNC machines.</description>
+    </item>
+
+    <item>
+      <title>The Living Oak: Engineering and Philosophy of Japanese Sashimono Joinery</title>
+      <link>https://thegentle.men/articles/the-living-oak-sashimono.html</link>
+      <guid>https://thegentle.men/articles/the-living-oak-sashimono.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Kenzo Takahashi</author>
+      <category>The Hand</category>
+      <description>How blind interlocking timber joints accommodate hygroscopic wood expansion across centuries without nails or adhesives.</description>
+    </item>
+
+    <item>
+      <title>Solitude as a Daily Discipline: The Architecture of the Unplugged Hour</title>
+      <link>https://thegentle.men/articles/solitude-as-a-daily-discipline.html</link>
+      <guid>https://thegentle.men/articles/solitude-as-a-daily-discipline.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Dr. Arthur Sterling</author>
+      <category>The Mind</category>
+      <description>Contrasting destructive isolation with generative otium through Seneca, Montaigne, and modern attention restoration research.</description>
+    </item>
+
+    <item>
+      <title>The Weight of the Hand-Penned Letter: Epistolary Culture as Moral Ceremony</title>
+      <link>https://thegentle.men/articles/the-weight-of-the-hand-penned-letter.html</link>
+      <guid>https://thegentle.men/articles/the-weight-of-the-hand-penned-letter.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>James Sinclair</author>
+      <category>The Mind</category>
+      <description>The physical friction of cotton rag paper, ebonite feeds, and drying ink as a moral antidote to instant messaging.</description>
+    </item>
+
+    <item>
+      <title>Fatherhood as Moral Stewardship: The Quiet Discipline of Mentorship</title>
+      <link>https://thegentle.men/articles/fatherhood-as-moral-stewardship.html</link>
+      <guid>https://thegentle.men/articles/fatherhood-as-moral-stewardship.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Marcus Thorne</author>
+      <category>The Mind</category>
+      <description>How children internalize fortitude, emotional constancy, and moral discernment through daily parental demeanor.</description>
+    </item>
+
+    <item>
+      <title>The Alchemy of the Seasoned Skillet: Polymerization, Iron, and Fire</title>
+      <link>https://thegentle.men/articles/the-alchemy-of-the-seasoned-skillet.html</link>
+      <guid>https://thegentle.men/articles/the-alchemy-of-the-seasoned-skillet.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Chef Matteo Rossi</author>
+      <category>The Table</category>
+      <description>The precise chemical mechanisms of fatty acid polymerization and volumetric thermal mass in cast iron.</description>
+    </item>
+
+    <item>
+      <title>Living Wine: Terroir, Indigenous Yeasts, and the Fallacy of Uniformity</title>
+      <link>https://thegentle.men/articles/living-wine-terroir-and-memory.html</link>
+      <guid>https://thegentle.men/articles/living-wine-terroir-and-memory.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Lucian Moreau</author>
+      <category>The Table</category>
+      <description>How low-intervention biodynamic viticulture and ambient yeasts preserve vineyard microbiome memory.</description>
+    </item>
+
+    <item>
+      <title>The Architecture of the Long Evening: The Art of Civilized Hospitality</title>
+      <link>https://thegentle.men/articles/the-architecture-of-the-long-evening.html</link>
+      <guid>https://thegentle.men/articles/the-architecture-of-the-long-evening.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Alistair Grey</author>
+      <category>The Table</category>
+      <description>The acoustic, pacing, and candlelight orchestration that dissolves modern social defenses and fosters enduring fellowship.</description>
+    </item>
+
+    <item>
+      <title>Sanctuaries of Silence: A Walking Pilgrimage Through Mount Kōya</title>
+      <link>https://thegentle.men/articles/sanctuaries-of-silence-mount-koya.html</link>
+      <guid>https://thegentle.men/articles/sanctuaries-of-silence-mount-koya.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Kenzo Takahashi</author>
+      <category>The Compass</category>
+      <description>Sensory architecture, temple dawn liturgy, and the acoustic clarity of walking through Okunoin's ancient cedar groves.</description>
+    </item>
+
+    <item>
+      <title>The Alpine Refuge: Architecture for Solitary Thought</title>
+      <link>https://thegentle.men/articles/the-alpine-refuge.html</link>
+      <guid>https://thegentle.men/articles/the-alpine-refuge.html</guid>
+      <pubDate>Sun, 22 Feb 2026 08:00:00 GMT</pubDate>
+      <author>Julian Vance</author>
+      <category>The Compass</category>
+      <description>Examining austere gneiss stone and larch timber shelters in the Swiss Grisons that clear mental clutter through structural honesty.</description>
+    </item>
+  </channel>
+</rss>

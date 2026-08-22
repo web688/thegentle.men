@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141311"/>
+      <stop offset="50%" stop-color="#1e1b17"/>
+      <stop offset="100%" stop-color="#0e0d0c"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#b8975a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#b8975a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#b8975a" stroke-width="0.3" stroke-opacity="0.15"/>
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  <circle cx="600" cy="337" r="400" fill="url(#goldGlow)"/>
+
+  <!-- Border Frames -->
+  <rect x="30" y="30" width="1140" height="615" fill="none" stroke="#b8975a" stroke-width="1" stroke-opacity="0.35"/>
+  <rect x="38" y="38" width="1124" height="599" fill="none" stroke="#b8975a" stroke-width="0.5" stroke-opacity="0.2"/>
+
+  <!-- Corner Flourishes -->
+  <path d="M 30 50 L 50 30 M 1170 50 L 1150 30 M 30 625 L 50 645 M 1170 625 L 1150 645" stroke="#b8975a" stroke-width="1" stroke-opacity="0.4"/>
+
+  <!-- Center Typography -->
+  <text x="600" y="270" text-anchor="middle" fill="#b8975a" font-family="Georgia, serif" font-size="16" letter-spacing="6" text-transform="uppercase" opacity="0.9">— THE MIND —</text>
+  
+  <line x1="450" y1="295" x2="750" y2="295" stroke="#b8975a" stroke-width="0.75" stroke-opacity="0.4"/>
+  
+  <text x="600" y="355" text-anchor="middle" fill="#e8e4df" font-family="Georgia, serif" font-size="32" font-weight="normal" letter-spacing="1.5">The Hand-Penned Letter</text>
+  
+  <text x="600" y="395" text-anchor="middle" fill="#948c80" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-style="italic" letter-spacing="1">Epistolary Culture</text>
+  
+  <text x="600" y="580" text-anchor="middle" fill="#b8975a" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" letter-spacing="3" text-transform="uppercase" opacity="0.6">THE GENTLE MEN ARCHIVE • EDITORIAL EDITION</text>
+</svg>
